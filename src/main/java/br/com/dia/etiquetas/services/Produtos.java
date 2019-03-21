@@ -21,6 +21,7 @@ public class Produtos {
 	public String CriandoSala(@RequestBody String json) throws TFormerException, JSONException {
 		try {
 			JSONObject etiquetas = new JSONObject(json);
+			etiquetas =  new JSONObject(String.valueOf(etiquetas.get(("Etiquetas"))));
 
 			JSONArray produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaUmQuadranteNormalOferta")));
 			GeneratorPdf etiquetaUmQuadranteNormalOferta = new GeneratorPdf(produtos,

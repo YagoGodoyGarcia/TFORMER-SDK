@@ -42,7 +42,7 @@ public class GeneratorPdf {
 
 			// Select the stand-alone FormLayout
 			String tff = dados.getString("Tff");
-			printJob.setRepositoryName("C:/Users/yagog/Downloads/tff yago/tff yago/PADRAO/" + tff);
+			printJob.setRepositoryName("C:/Users/Giuliano/Downloads/TFFs/" + tff);
 
 			// Create a new JobData instance.
 			// Here we are using the JobDataRecordSet which accepts Records containing
@@ -77,8 +77,8 @@ public class GeneratorPdf {
 
 				}
 
-			} else if (tipo.equals("tresQuadranteComboPorcMaisUnidade")
-					|| tipo.equals("tresQuadranteComboPorcUmaUnidade")
+			} else if (tipo.equals("etiquetaTresQuadranteComboPorcMaisUnidade")
+					|| tipo.equals("etiquetaTresQuadranteComboPorcUmaUnidade")
 					|| tipo.equals("etiquetaUmQuadranteComboPorcMaisUnidade")
 					|| tipo.equals("etiquetaUmQuadranteComboPorcUmaUnidade")) {
 
@@ -102,7 +102,7 @@ public class GeneratorPdf {
 					record.setData("Des_Pre_Uni_Med_Neto_Ofe", produto.getString("Des_Pre_Uni_Med_Neto_Ofe"));
 					record.setData("Unidade", produto.getString("Unidade"));
 					record.setData("Porcento", produto.getString("Porcento"));
-					record.setData("Fecha_Fin_Promocion_China", produto.getString(" Fecha_Fin_Promocion_China"));
+					record.setData("Fecha_Fin_Promocion_China", produto.getString("Fecha_Fin_Promocion_China"));
 					// Add the Record to the JobData
 					jobData.add(record);
 
@@ -131,7 +131,7 @@ public class GeneratorPdf {
 					record.setData("Des_Pre_Uni_Med_Neto_Ofe", produto.getString("Des_Pre_Uni_Med_Neto_Ofe"));
 					record.setData("Pague", produto.getString("Pague"));
 					record.setData("Leve", produto.getString("Leve"));
-					record.setData("Fecha_Fin_Promocion_China", produto.getString(" Fecha_Fin_Promocion_China"));
+					record.setData("Fecha_Fin_Promocion_China", produto.getString("Fecha_Fin_Promocion_China"));
 					// Add the Record to the JobData
 					jobData.add(record);
 
@@ -158,8 +158,11 @@ public class GeneratorPdf {
 					record.setData("Descuento_Oferta", produto.getString("Descuento_Oferta"));
 					record.setData("Precio_Neto_Oferta", produto.getString("Precio_Neto_Oferta"));
 					record.setData("Des_Pre_Uni_Med_Neto_Ofe", produto.getString("Des_Pre_Uni_Med_Neto_Ofe"));
-					record.setData("Unidade", produto.getString("Unidade"));
-					record.setData("Fecha_Fin_Promocion_China", produto.getString(" Fecha_Fin_Promocion_China"));
+					
+					//OLHAR LAYOUT NO TFF, VERIFICAR O CAMPO
+					//record.setData("Unidade", produto.getString("Unidade"));
+					//record.setData("Fecha_Fin_Promocion_China", produto.getString("Fecha_Fin_Promocion_China"));
+					
 					// Add the Record to the JobData
 					jobData.add(record);
 
@@ -178,9 +181,9 @@ public class GeneratorPdf {
 			int minutos = cal.get(Calendar.MINUTE);
 			int segundos = cal.get(Calendar.SECOND);
 			int milissegundo = cal.get(Calendar.MILLISECOND);
-			String caminho = "C:.../" + +loja + "" + dia + "" + mes + "" + ano + "" + horas + "" + minutos + ""
+			String caminho = "C:/Users/Giuliano/Downloads/TFFs/PDF/" + tipo +loja + "" + dia + "" + mes + "" + ano + "" + horas + "" + minutos + ""
 					+ segundos + ".pdf";
-			// Select PDF output to /temp/out.pdf
+
 			printJob.setOutputName(caminho);
 			printJob.setJobData(jobData);
 
@@ -195,10 +198,9 @@ public class GeneratorPdf {
 	}
 
 	public void ChamadaKaizala(String caminho, int loja) throws IOException {
-		URL obj = new URL("CAMINHO DA API KAIZALA");
+		URL obj = new URL("http://localhost:3000/api/notificacao");
 
-		String body = "{ \"caminho\": " + caminho + ",  \"loja\": " + loja + "}";
-
+		String body = "{ \"caminho\": \"" + caminho + "\",  \"loja\": " + loja + "}";
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 		con.setRequestMethod("POST");
 		con.setRequestProperty("content-type", "application/json");
