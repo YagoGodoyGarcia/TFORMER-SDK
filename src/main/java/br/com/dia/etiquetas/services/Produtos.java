@@ -11,6 +11,8 @@ import com.tecit.TFORMer.TFormerException;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
+
+import br.com.dia.etiquetas.services.tfotmer.ConcatenarPdf;
 import br.com.dia.etiquetas.services.tfotmer.GeneratorPdf;
 
 @Controller
@@ -78,7 +80,9 @@ public class Produtos {
 			
 			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaA5ComboPorcMaisUnidade")));
 			GeneratorPdf etiquetaA5ComboPorcMaisUnidade = new GeneratorPdf(produtos, "etiquetaA5ComboPorcMaisUnidade", rota);
-
+			
+			ConcatenarPdf gerar = new ConcatenarPdf();
+			
 			return "Ok";
 		} catch (Exception e) {
 			return "Error: " + e;
