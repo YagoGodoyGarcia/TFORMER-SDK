@@ -31,10 +31,12 @@ import org.json.JSONArray;
  */
 public class GeneratorPdf {
 
-	public GeneratorPdf(JSONArray json, String tipo, String rota) throws TFormerException {
+	public JSONArray Pdf(JSONArray json, String tipo, String rota) throws TFormerException {
+		JSONArray resultado = null;
 		if (json.length() != 0) {
-			Etiquetar(json, tipo, rota);
+			resultado = Etiquetar(json, tipo, rota);
 		}
+		return resultado;
 	}
 
 	public JSONArray Etiquetar(JSONArray json, String tipo, String rota) throws TFormerException {

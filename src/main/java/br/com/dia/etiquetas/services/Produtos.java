@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.tecit.TFORMer.TFormerException;
 
 import org.json.JSONException;
@@ -24,100 +25,66 @@ public class Produtos {
 		try {
 			JSONObject etiquetas = new JSONObject(json);
 			String rota = (String) etiquetas.get("Rota");
+			GeneratorPdf gerador = null;
 			
 			etiquetas =  new JSONObject(String.valueOf(etiquetas.get(("Etiquetas"))));
 			
-			JSONArray produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaUmQuadranteNormalOferta")));
-			GeneratorPdf etiquetaUmQuadranteNormalOferta = new GeneratorPdf(produtos, "etiquetaUmQuadranteNormalOferta", rota);
-			
-			body.put(etiquetaUmQuadranteNormalOferta);
+			JSONArray produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaUmQuadranteNormalOferta")));			
+			body.put(gerador.Pdf(produtos, "etiquetaUmQuadranteNormalOferta", rota));
 			
 			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaUmQuadranteClubDia")));
-			GeneratorPdf etiquetaUmQuadranteClubDia = new GeneratorPdf(produtos, "etiquetaUmQuadranteClubDia", rota);
-
-			body.put(etiquetaUmQuadranteClubDia);	
+			body.put(gerador.Pdf(produtos, "etiquetaUmQuadranteClubDia", rota));	
 			
 			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaUmQuadranteComboLevePague")));
-			GeneratorPdf etiquetaUmQuadranteComboLevePague = new GeneratorPdf(produtos, "etiquetaUmQuadranteComboLevePague", rota);
-
-			body.put(etiquetaUmQuadranteComboLevePague);	
+			body.put(gerador.Pdf(produtos, "etiquetaUmQuadranteComboLevePague", rota));	
 			
 			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaUmQuadranteComboAPartir")));
-			GeneratorPdf etiquetaUmQuadranteComboAPartir = new GeneratorPdf(produtos, "etiquetaUmQuadranteComboAPartir", rota);
-
-			body.put(etiquetaUmQuadranteComboAPartir);
+			body.put(gerador.Pdf(produtos, "etiquetaUmQuadranteComboAPartir", rota));
 			
 			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaUmQuadranteComboPorcUmaUnidade")));
-			GeneratorPdf etiquetaUmQuadranteComboPorcUmaUnidade = new GeneratorPdf(produtos, "etiquetaUmQuadranteComboPorcUmaUnidade", rota);
-
-			body.put(etiquetaUmQuadranteComboPorcUmaUnidade);
+			body.put(gerador.Pdf(produtos, "etiquetaUmQuadranteComboPorcUmaUnidade", rota));
 			
 			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaUmQuadranteComboPorcMaisUnidade")));
-			GeneratorPdf etiquetaUmQuadranteComboPorcMaisUnidade = new GeneratorPdf(produtos, "etiquetaUmQuadranteComboPorcMaisUnidade", rota);
-
-			body.put(etiquetaUmQuadranteComboPorcMaisUnidade);
+			body.put(gerador.Pdf(produtos, "etiquetaUmQuadranteComboPorcMaisUnidade", rota));
 			
 			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaTresQuadranteNormalOferta")));
-			GeneratorPdf etiquetaTresQuadranteNormalOferta = new GeneratorPdf(produtos, "etiquetaTresQuadranteNormalOferta", rota);
-
-			body.put(etiquetaTresQuadranteNormalOferta);
+			body.put(gerador.Pdf(produtos, "etiquetaTresQuadranteNormalOferta", rota));
 			
 			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaTresQuadranteClubDia")));
-			GeneratorPdf etiquetaTresQuadranteClubDia = new GeneratorPdf(produtos, "etiquetaTresQuadranteClubDia", rota);
-
-			body.put(etiquetaTresQuadranteClubDia);
+			body.put(gerador.Pdf(produtos, "etiquetaTresQuadranteClubDia", rota));
 			
 			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaTresQuadranteComboLevePague")));
-			GeneratorPdf etiquetaTresQuadranteComboLevePague = new GeneratorPdf(produtos, "etiquetaTresQuadranteComboLevePague", rota);
-
-			body.put(etiquetaTresQuadranteComboLevePague);
+			body.put(gerador.Pdf(produtos, "etiquetaTresQuadranteComboLevePague", rota));
 			
 			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaTresQuadranteComboAPartir")));
-			GeneratorPdf etiquetaTresQuadranteComboAPartir = new GeneratorPdf(produtos, "etiquetaTresQuadranteComboAPartir", rota);
-
-			body.put(etiquetaTresQuadranteComboAPartir);
+			body.put(gerador.Pdf(produtos, "etiquetaTresQuadranteComboAPartir", rota));
 			
 			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaTresQuadranteComboPorcUmaUnidade")));
-			GeneratorPdf etiquetaTresQuadranteComboPorcUmaUnidade = new GeneratorPdf(produtos, "etiquetaTresQuadranteComboPorcUmaUnidade", rota);
-
-			body.put(etiquetaTresQuadranteComboPorcUmaUnidade);
+			body.put(gerador.Pdf(produtos, "etiquetaTresQuadranteComboPorcUmaUnidade", rota));
 			
-			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaTresQuadranteComboPorcMaisUnidade")));
-			GeneratorPdf etiquetaTresQuadranteComboPorcMaisUnidade = new GeneratorPdf(produtos, "etiquetaTresQuadranteComboPorcMaisUnidade", rota);
+			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaTresQuadranteComboPorcMaisUnidade")));			
+			body.put(gerador.Pdf(produtos, "etiquetaTresQuadranteComboPorcMaisUnidade", rota));
 			
-			body.put(etiquetaTresQuadranteComboPorcMaisUnidade);
+			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaA5")));			
+			body.put(gerador.Pdf(produtos, "etiquetaA5", rota));
 			
-			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaA5")));
-			GeneratorPdf etiquetaA5 = new GeneratorPdf(produtos, "etiquetaA5", rota);
+			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaA5ClubDia")));			
+			body.put(gerador.Pdf(produtos, "etiquetaA5ClubDia", rota));
 			
-			body.put(etiquetaA5);
+			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaA5ComboLevePague")));			
+			body.put(gerador.Pdf(produtos, "etiquetaA5ComboLevePague", rota));
 			
-			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaA5ClubDia")));
-			GeneratorPdf etiquetaA5ClubDia = new GeneratorPdf(produtos, "etiquetaA5ClubDia", rota);
+			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaA5ComboAPartir")));			
+			body.put(gerador.Pdf(produtos, "etiquetaA5ComboAPartir", rota));
 			
-			body.put(etiquetaA5ClubDia);
+			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaA5ComboPorcUmaUnidade")));			
+			body.put(gerador.Pdf(produtos, "etiquetaA5ComboPorcUmaUnidade", rota));
 			
-			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaA5ComboLevePague")));
-			GeneratorPdf etiquetaA5ComboLevePague = new GeneratorPdf(produtos, "etiquetaA5ComboLevePague", rota);
+			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaA5ComboPorcMaisUnidade")));			
+			body.put(gerador.Pdf(produtos, "etiquetaA5ComboPorcMaisUnidade", rota));
 			
-			body.put(etiquetaA5ComboLevePague);
-			
-			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaA5ComboAPartir")));
-			GeneratorPdf etiquetaA5ComboAPartir = new GeneratorPdf(produtos, "etiquetaA5ComboAPartir", rota);
-			
-			body.put(etiquetaA5ComboAPartir);
-			
-			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaA5ComboPorcUmaUnidade")));
-			GeneratorPdf etiquetaA5ComboPorcUmaUnidade = new GeneratorPdf(produtos, "etiquetaA5ComboPorcUmaUnidade", rota);
-			
-			body.put(etiquetaA5ComboPorcUmaUnidade);
-			
-			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaA5ComboPorcMaisUnidade")));
-			GeneratorPdf etiquetaA5ComboPorcMaisUnidade = new GeneratorPdf(produtos, "etiquetaA5ComboPorcMaisUnidade", rota);
-			
-			body.put(etiquetaA5ComboPorcMaisUnidade);
-			
-			System.out.println(body.get(0));
+			Gson g = new Gson();
+			System.out.println(g.toJson(body));
 			
 			return "Ok";
 		} catch (Exception e) {
