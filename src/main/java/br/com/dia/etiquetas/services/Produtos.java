@@ -117,7 +117,7 @@ public class Produtos {
 			
 			body.put(etiquetaA5ComboPorcMaisUnidade);
 			
-			System.out.println(body);
+			System.out.println(body.get(0));
 			
 			return "Ok";
 		} catch (Exception e) {
