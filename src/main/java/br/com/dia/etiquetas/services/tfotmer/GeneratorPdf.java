@@ -37,7 +37,9 @@ public class GeneratorPdf {
 		}
 	}
 
-	public void Etiquetar(JSONArray json, String tipo, String rota) throws TFormerException {
+	public JSONObject Etiquetar(JSONArray json, String tipo, String rota) throws TFormerException {
+		
+		JSONObject objetoResultado = null;
 		try {
 			List<Integer> empresas = new ArrayList<Integer>();
 			List<Integer> lojasList = new ArrayList<Integer>();
@@ -380,16 +382,18 @@ public class GeneratorPdf {
 					printJob.setPrinterType(EPrinterType.PDFFile);
 					// Generate PDF
 					printJob.print();
-					ChamadaKaizala(caminho, lojas.getInt(j), ids, rota);
+					String body = "{ \"caminho\": \"" + caminho + "\",  \"loja\": " + loja + ", \"ids\": "  + "\"" + ids + "\"" + "}";
+					JSONObject objeto = new JSONObject(body);
+					objetoResultado = objeto;
+					//ChamadaKaizala(caminho, lojas.getInt(j), ids, rota);
 				}
-				
-
 			}
 
 			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		return objetoResultado;
 	}
 
 	public void ChamadaKaizala(String caminho, int loja, List<String> ids, String rota) throws IOException {
