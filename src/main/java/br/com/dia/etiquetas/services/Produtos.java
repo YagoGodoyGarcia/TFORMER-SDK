@@ -80,8 +80,7 @@ public class Produtos {
 			
 			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaA5ComboPorcMaisUnidade")));
 			GeneratorPdf etiquetaA5ComboPorcMaisUnidade = new GeneratorPdf(produtos, "etiquetaA5ComboPorcMaisUnidade", rota);
-			
-			ConcatenarPdf gerar = new ConcatenarPdf();
+
 			
 			return "Ok";
 		} catch (Exception e) {
