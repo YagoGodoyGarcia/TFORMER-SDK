@@ -31,7 +31,7 @@ import org.json.JSONArray;
  */
 public class GeneratorPdf {
 
-	public JSONArray Pdf(JSONArray json, String tipo, String rota) throws TFormerException {
+	public JSONArray Pdf(JSONArray json, String tipo, String rota) throws TFormerException {	
 		JSONArray resultado = null;
 		if (json.length() != 0) {
 			resultado = Etiquetar(json, tipo, rota);
@@ -39,9 +39,8 @@ public class GeneratorPdf {
 		return resultado;
 	}
 
-	public JSONArray Etiquetar(JSONArray json, String tipo, String rota) throws TFormerException {
-		
-		JSONArray objetoResultado = null;
+	public JSONArray Etiquetar(JSONArray json, String tipo, String rota) throws TFormerException {		
+		JSONArray objetoResultado = new JSONArray();
 		try {
 			List<Integer> empresas = new ArrayList<Integer>();
 			List<Integer> lojasList = new ArrayList<Integer>();
@@ -403,6 +402,7 @@ public class GeneratorPdf {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+	
 		return objetoResultado;
 	}
 

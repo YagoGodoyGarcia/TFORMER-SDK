@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
 import com.tecit.TFORMer.TFormerException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import org.json.JSONArray;
 
 import br.com.dia.etiquetas.services.tfotmer.GeneratorPdf;
@@ -25,19 +25,19 @@ public class Produtos {
 		try {
 			JSONObject etiquetas = new JSONObject(json);
 			String rota = (String) etiquetas.get("Rota");
-			GeneratorPdf gerador = null;
-			
+			GeneratorPdf gerador = new GeneratorPdf();
+					
 			etiquetas =  new JSONObject(String.valueOf(etiquetas.get(("Etiquetas"))));
 			
-			JSONArray produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaUmQuadranteNormalOferta")));			
+			JSONArray produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaUmQuadranteNormalOferta")));
 			body.put(gerador.Pdf(produtos, "etiquetaUmQuadranteNormalOferta", rota));
-			
+
 			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaUmQuadranteClubDia")));
 			body.put(gerador.Pdf(produtos, "etiquetaUmQuadranteClubDia", rota));	
 			
 			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaUmQuadranteComboLevePague")));
 			body.put(gerador.Pdf(produtos, "etiquetaUmQuadranteComboLevePague", rota));	
-			
+
 			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaUmQuadranteComboAPartir")));
 			body.put(gerador.Pdf(produtos, "etiquetaUmQuadranteComboAPartir", rota));
 			
@@ -52,7 +52,7 @@ public class Produtos {
 			
 			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaTresQuadranteClubDia")));
 			body.put(gerador.Pdf(produtos, "etiquetaTresQuadranteClubDia", rota));
-			
+			/******** AQUI PARA ************/
 			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaTresQuadranteComboLevePague")));
 			body.put(gerador.Pdf(produtos, "etiquetaTresQuadranteComboLevePague", rota));
 			
@@ -82,13 +82,12 @@ public class Produtos {
 			
 			produtos = new JSONArray(String.valueOf(etiquetas.get("etiquetaA5ComboPorcMaisUnidade")));			
 			body.put(gerador.Pdf(produtos, "etiquetaA5ComboPorcMaisUnidade", rota));
-			
-			Gson g = new Gson();
-			System.out.println(g.toJson(body));
+
 			
 			return "Ok";
 		} catch (Exception e) {
 			return "Error: " + e;
 		}
 	}
+		
 }
